@@ -24,3 +24,5 @@ RUN sh -c "if [ $INSTALL_DEV == 'true' ] ; then poetry install --no-root ; else 
 
 COPY ./app /app
 ENV PYTHONPATH=/app
+
+ENTRYPOINT [ "/app/entrypoint.sh" ]

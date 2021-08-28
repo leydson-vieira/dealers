@@ -3,14 +3,27 @@ from pathlib import Path
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-SECRET_KEY = os.getenv("SECRET_KEY")
+SECRET_KEY = os.getenv('SECRET_KEY')
 
-DEBUG = int(os.getenv("DEBUG", default=0))
+DEBUG = int(os.getenv('DEBUG', default=0))
 
 ALLOWED_HOSTS = ['*']
 
 AUTH_USER_MODEL = 'authentication.Dealer'
 
+APPROVED_ALLOWED_DEALERS = eval(os.getenv('APPROVED_ALLOWED_DEALERS', '[]'))
+
+EXTERNAL_CASHBACK_API = os.getenv('EXTERNAL_CASHBACK_API')
+EXTERNAL_CASHBACK_API_TOKEN = os.getenv('EXTERNAL_CASHBACK_API_TOKEN')
+
+# Cashback Rules
+FIRST_LEVEL_CASHBACK_TARGET = int(os.getenv('FIRST_LEVEL_CASHBACK_TARGET', '1000'))
+FIRST_LEVEL_CASHBACK_PERCENT = os.getenv('FIRST_LEVEL_CASHBACK_PERCENT', '0.1')
+
+SECOND_LEVEL_CASHBACK_TARGET = int(os.getenv('SECOND_LEVEL_CASHBACK_TARGET', '1500'))
+SECOND_LEVEL_CASHBACK_PERCENT = os.getenv('SECOND_LEVEL_CASHBACK_PERCENT', '0.15')
+
+THIRD_LEVEL_CASHBACK_PERCENT = os.getenv('THIRD_LEVEL_CASHBACK_PERCENT', '0.2')
 
 # Application definition
 
@@ -44,13 +57,13 @@ ROOT_URLCONF = 'idealers.urls'
 WSGI_APPLICATION = 'idealers.wsgi.application'
 
 DATABASES = {
-    "default": {
-        "ENGINE": os.getenv("SQL_ENGINE", "django.db.backends.sqlite3"),
-        "NAME": os.getenv("POSTGRES_DB", os.path.join(BASE_DIR, "db.sqlite3")),
-        "USER": os.getenv("POSTGRES_USER", "user"),
-        "PASSWORD": os.getenv("POSTGRES_PASSWORD", "password"),
-        "HOST": os.getenv("POSTGRES_HOST", "localhost"),
-        "PORT": os.getenv("POSTGRES_PORT", "5432"),
+    'default': {
+        'ENGINE': os.getenv('SQL_ENGINE', 'django.db.backends.sqlite3'),
+        'NAME': os.getenv('POSTGRES_DB', os.path.join(BASE_DIR, 'db.sqlite3')),
+        'USER': os.getenv('POSTGRES_USER', 'user'),
+        'PASSWORD': os.getenv('POSTGRES_PASSWORD', 'password'),
+        'HOST': os.getenv('POSTGRES_HOST', 'localhost'),
+        'PORT': os.getenv('POSTGRES_PORT', '5432'),
     }
 }
 

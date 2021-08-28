@@ -9,6 +9,8 @@ DEBUG = int(os.getenv("DEBUG", default=0))
 
 ALLOWED_HOSTS = ['*']
 
+AUTH_USER_MODEL = 'authentication.Dealer'
+
 
 # Application definition
 

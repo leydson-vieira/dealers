@@ -1,0 +1,2 @@
+class DealerAlreadyExists(Exception):
+    pass

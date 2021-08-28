@@ -6,8 +6,7 @@ from .exceptions import DealerAlreadyExists
 
 class DealerService:
     @staticmethod
-    def create_dealer(full_name, cpf, email, password):
+    def create_dealer(full_name: str, cpf: str, email: str, password: str) -> Dealer:
         if Dealer.objects.filter(Q(email=email) | Q(cpf=cpf)).exists():
             raise DealerAlreadyExists()
-        dealer: Dealer = Dealer.objects.create_user(full_name, email, password, cpf)
-        return dealer
+        return Dealer.objects.create_user(full_name, email, password, cpf)

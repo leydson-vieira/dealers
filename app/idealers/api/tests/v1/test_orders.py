@@ -126,3 +126,42 @@ class TestApiV1Orders:
         response_data = response.json()
 
         assert response.status_code == status.HTTP_409_CONFLICT
+
+    def test_should_not_update_an_order_when_not_exist(self, logged_client):
+        payload = {
+            "amount": "5200.50",
+            "date": "2021-08-28T13:45:00.000Z"
+        }
+
+        response = logged_client.patch(
+            reverse(
+                'orders-detail', kwargs={'order_id': '2fa3a532-94ee-4e82-8372-57fc97644ab3'}
+            ),
+            payload,
+        )
+
+        response_data = response.json()
+
+        assert response.status_code == status.HTTP_404_NOT_FOUND
+
+    def test_should_not_update_an_order_when_not_in_validation(
+        self, logged_client, cashback
+    ):
+        cashback.order.status = Order.Status.REJECTED
+        cashback.order.save()
+
+        payload = {
+            "amount": "5200.50",
+            "date": "2021-08-28T13:45:00.000Z"
+        }
+
+        response = logged_client.patch(
+            reverse(
+                'orders-detail', kwargs={'order_id': str(cashback.order.id)}
+            ),
+            payload,
+        )
+
+        response_data = response.json()
+
+        assert response.status_code == status.HTTP_400_BAD_REQUEST

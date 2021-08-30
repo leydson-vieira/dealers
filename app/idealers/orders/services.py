@@ -21,7 +21,7 @@ class OrderService:
         cpf: str,
     ) -> Order:
         dealer: Dealer = cls.get_dealer_or_raise_exception(code=code, cpf=cpf)
-        
+
         status = Order.Status.IN_VALIDATION
         if cpf in settings.APPROVED_ALLOWED_DEALERS:
             status = Order.Status.APPROVED
@@ -40,7 +40,7 @@ class OrderService:
         code: str = kwargs.get('code')
 
         if cpf or code:
-            dealer: Dealer = cls.get_dealer_or_raise_exception(code=code, cpf=kwargs.get(cpf))
+            dealer: Dealer = cls.get_dealer_or_raise_exception(code=code, cpf=cpf)
 
         order = Order.objects.filter(pk=order_id).first()
         if not order:

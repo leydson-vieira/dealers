@@ -28,10 +28,3 @@ class Order(models.Model):
         on_delete=models.DO_NOTHING,
         related_name='orders',
     )
-
-    def __str__(self) -> str:
-        return f'Order: {self.id}'
-
-    @property
-    def has_cashback(self):
-        return hasattr(self, 'cashback')

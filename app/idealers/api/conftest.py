@@ -16,8 +16,13 @@ def user():
     )
 
 @pytest.fixture
-def logged_client(user):
-    refresh = RefreshToken.for_user(user)
+def unlogged_client(user):
     client = APIClient()
+    return client
+
+@pytest.fixture
+def logged_client(user):
+    client = APIClient()
+    refresh = RefreshToken.for_user(user)
     client.credentials(HTTP_AUTHORIZATION=f'Bearer {refresh.access_token}')
     return client

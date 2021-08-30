@@ -15,6 +15,8 @@ class DealerManager(BaseUserManager):
             raise ValueError('Email field is required')
         if not cpf:
             raise ValueError('Cpf field is required')
+        if not password:
+            raise ValueError('Password field is required')
 
         email = self.normalize_email(email)
         user = self.model(full_name=full_name, email=email, cpf=cpf, **extra_fields)

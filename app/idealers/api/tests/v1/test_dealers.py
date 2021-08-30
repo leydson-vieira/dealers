@@ -17,12 +17,6 @@ class TestApiV1Dealers:
             'password': 'teste123'
         }
 
-    @pytest.fixture
-    def unlogged_client(self, logged_client):
-        # disable credentials
-        logged_client.credentials()
-        return logged_client
-
     def test_should_create_dealer(self, unlogged_client, payload):
         # disable credentials
         unlogged_client.credentials()
@@ -50,4 +44,5 @@ class TestApiV1Dealers:
         response = logged_client.post(reverse('dealers'), payload)
         dealer = Dealer.objects.get(email='teste@teste.com')
 
+        assert response.status_code == status.HTTP_201_CREATED
         assert dealer.cpf == '38723274885'

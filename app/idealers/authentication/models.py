@@ -23,6 +23,3 @@ class Dealer(AbstractBaseUser):
 
     USERNAME_FIELD = 'email'
     REQUIRED_FIELDS = ['cpf']
-
-    def __str__(self) -> str:
-        return f'User: {self.email}'

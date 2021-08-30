@@ -7,7 +7,7 @@ class Cashback(models.Model):
     """
     order = models.OneToOneField(
         'orders.Order',
-        on_delete=models.DO_NOTHING,
+        on_delete=models.CASCADE,
         primary_key=True
     )
 

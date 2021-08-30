@@ -1,6 +1,8 @@
 version: '3.8'
 services:
   server:
+    stdin_open: true
+    tty: true
     image: idealers_app
     build:
       context: .

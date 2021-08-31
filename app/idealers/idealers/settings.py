@@ -1,4 +1,4 @@
-import os
+import os, sys
 from pathlib import Path
 
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -15,6 +15,7 @@ APPROVED_ALLOWED_DEALERS = eval(os.getenv('APPROVED_ALLOWED_DEALERS', '[]'))
 
 EXTERNAL_CASHBACK_API = os.getenv('EXTERNAL_CASHBACK_API')
 EXTERNAL_CASHBACK_API_TOKEN = os.getenv('EXTERNAL_CASHBACK_API_TOKEN')
+EXTERNAL_CASHBACK_API_TOKEN_HEADER = os.getenv('EXTERNAL_CASHBACK_API_TOKEN_HEADER')
 
 # Cashback Rules
 FIRST_LEVEL_CASHBACK_TARGET = int(os.getenv('FIRST_LEVEL_CASHBACK_TARGET', '1000'))
@@ -89,6 +90,20 @@ REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': (
         'rest_framework_simplejwt.authentication.JWTAuthentication',
     )
+}
+
+LOGGING = {
+    'version': 1,
+    'handlers': {
+        'console': {
+            'class': 'logging.StreamHandler',
+            'stream': sys.stdout,
+        }
+    },
+    'root': {
+        'handlers': ['console'],
+        'level': 'INFO'
+    }
 }
 
 # Password validation

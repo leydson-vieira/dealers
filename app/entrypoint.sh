@@ -11,6 +11,6 @@ then
     echo "PostgreSQL started"
 fi
 
-python idealers/manage.py migrate
+python manage.py migrate
 
 exec "$@"

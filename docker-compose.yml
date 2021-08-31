@@ -1,13 +1,25 @@
 version: '3.8'
 services:
   server:
-    stdin_open: true
-    tty: true
     image: idealers_app
+    working_dir: /app/idealers/
     build:
       context: .
       dockerfile: Dockerfile
-    command: python idealers/manage.py runserver 0.0.0.0:8000
+    command: gunicorn idealers.wsgi:application --bind 0.0.0.0:8000
+    volumes:
+      - ./app/:/app/
+    env_file:
+      - ./app/.env
+    ports:
+      - 8000:8000
+    depends_on:
+      - db
+  tests:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    command: pytest -v idealers/ --cov --cov-report term-missing
     volumes:
       - ./app/:/app/
     env_file:

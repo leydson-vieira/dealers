@@ -112,7 +112,7 @@ Here I make avaliable for you a [Insomnia Collection](https://github.com/leydson
     GET /api/v1/orders/
     
     curl --request GET \
-      --url http://localhost:8000/api/v1/orders/ \
+      --url 'http://localhost:8000/api/v1/orders/?limit=10&offset=0' \
       --header 'Authorization: Bearer <TOKEN>'
 
 ##### Responses:

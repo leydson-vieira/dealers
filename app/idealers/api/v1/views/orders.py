@@ -14,7 +14,13 @@ class OrderView(APIView):
     permission_classes = (IsAuthenticated,)
 
     def get(self, request, *args, **kwargs) -> Response:
-        orders = OrderService.list_orders()
+        limit = request.query_params.get("limit", '')
+        offset = request.query_params.get("offset", '')
+
+        limit = int(limit) if limit.isdigit() else 10
+        offset = int(offset) if offset.isdigit() else 0
+
+        orders = OrderService.list_orders(limit, offset)
         serializer = OrderListSerializer(instance=orders, many=True)
         return Response(data=serializer.data)
 

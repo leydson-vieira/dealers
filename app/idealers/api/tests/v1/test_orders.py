@@ -97,6 +97,15 @@ class TestApiV1Orders:
         assert response.status_code == status.HTTP_200_OK
         assert response_data[0]['id'] == str(cashback.order.id)
 
+    def test_should_list_orders_with_limit(self, logged_client, cashback):
+
+        response = logged_client.get(reverse('orders') + '?limit=1&offset=0')
+
+        response_data = response.json()
+
+        assert response.status_code == status.HTTP_200_OK
+        assert response_data[0]['id'] == str(cashback.order.id)
+
     def test_should_update_an_order(self, logged_client, cashback):
         payload = {
             'cpf': '38723274884',

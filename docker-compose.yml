@@ -19,6 +19,7 @@ services:
     build:
       context: .
       dockerfile: Dockerfile
+    working_dir: /app/idealers/
     command: pytest -v idealers/ --cov --cov-report term-missing
     volumes:
       - ./app/:/app/

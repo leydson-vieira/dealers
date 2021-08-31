@@ -30,10 +30,10 @@ class TestApiV1Orders:
     @pytest.fixture
     def payload(self):
         return {
-            "code": "007162t35",
-            "cpf": "38723274884",
-            "amount": "5200.50",
-            "date": "2021-08-28T13:45:00.000Z"
+            'code': '007162t35',
+            'cpf': '38723274884',
+            'amount': '5200.50',
+            'date': '2021-08-28T13:45:00.000Z'
         }
 
     def test_should_return_unauthorized(self, unlogged_client, payload):
@@ -99,8 +99,9 @@ class TestApiV1Orders:
 
     def test_should_update_an_order(self, logged_client, cashback):
         payload = {
-            "amount": "150",
-            "date": "2021-08-28T13:45:00.000Z"
+            'cpf': '38723274884',
+            'amount': '150',
+            'date': '2021-08-28T13:45:00.000Z'
         }
 
         response = logged_client.patch(
@@ -117,10 +118,10 @@ class TestApiV1Orders:
         self, logged_client, cashback
     ):
         payload = {
-            "code": "007162t35",
-            "cpf": "38723274884",
-            "amount": "5200.50",
-            "date": "2021-08-28T13:45:00.000Z"
+            'code': '007162t35',
+            'cpf': '38723274884',
+            'amount': '5200.50',
+            'date': '2021-08-28T13:45:00.000Z'
         }
 
         response = logged_client.patch(
@@ -132,8 +133,8 @@ class TestApiV1Orders:
 
     def test_should_not_update_an_order_when_not_exist(self, logged_client):
         payload = {
-            "amount": "5200.50",
-            "date": "2021-08-28T13:45:00.000Z"
+            'amount': '5200.50',
+            'date': '2021-08-28T13:45:00.000Z'
         }
 
         response = logged_client.patch(
@@ -153,8 +154,8 @@ class TestApiV1Orders:
         cashback.order.save()
 
         payload = {
-            "amount": "5200.50",
-            "date": "2021-08-28T13:45:00.000Z"
+            'amount': '5200.50',
+            'date': '2021-08-28T13:45:00.000Z'
         }
 
         response = logged_client.patch(

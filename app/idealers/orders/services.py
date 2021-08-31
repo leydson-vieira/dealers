@@ -46,8 +46,9 @@ class OrderService:
         if order.status != Order.Status.IN_VALIDATION:
             raise StatusNotAllowed()
 
-        dealer: Dealer = cls.get_dealer_or_raise_exception(code=code, cpf=cpf)
-        order.dealer = dealer
+        if cpf:
+            dealer: Dealer = cls.get_dealer_or_raise_exception(code=code, cpf=cpf)
+            order.dealer = dealer
 
         for attr, value in kwargs.items():
             if hasattr(order, attr):

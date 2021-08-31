@@ -59,10 +59,10 @@ class TestOrderService:
         assert order.cashback.amount == expected_cashback_amount
 
     @pytest.mark.parametrize(
-        "cpf,status",
+        'cpf,status',
         [
-            ("38723274884", Order.Status.IN_VALIDATION),
-            ("15350946056", Order.Status.APPROVED),
+            ('38723274884', Order.Status.IN_VALIDATION),
+            ('15350946056', Order.Status.APPROVED),
         ],
     )
     def test_should_return_status_validation_to_approved_cpf(

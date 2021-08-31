@@ -40,20 +40,21 @@ class OrderService:
         cpf: str = kwargs.get('cpf')
         code: str = kwargs.get('code')
 
-        if cpf or code:
-            dealer: Dealer = cls.get_dealer_or_raise_exception(code=code, cpf=cpf)
-
         order = Order.objects.filter(pk=order_id).first()
         if not order:
             raise OrderDoesNotExist()
         if order.status != Order.Status.IN_VALIDATION:
             raise StatusNotAllowed()
 
+        dealer: Dealer = cls.get_dealer_or_raise_exception(code=code, cpf=cpf)
+        order.dealer = dealer
+
         for attr, value in kwargs.items():
-            setattr(order, attr, value)
+            if hasattr(order, attr):
+                setattr(order, attr, value)
 
         order.save()
-        
+
         cls._create_or_update_cashback_by_order(order)
 
         return order
@@ -78,7 +79,7 @@ class OrderService:
         if code:
             if Order.objects.filter(code=code).exists():
                 raise OrderCodeAlreadyExists()
-        
+
         dealer: Dealer = Dealer.objects.filter(cpf=cpf).first()
         if not dealer:
             raise DealerDoesNotExist()
@@ -97,7 +98,7 @@ class OrderService:
         if order.amount <= settings.FIRST_LEVEL_CASHBACK_TARGET:
             amount = order.amount * first_level_cashback_percent
             percentage = first_level_cashback_percent
-    
+
         elif order.amount <= settings.SECOND_LEVEL_CASHBACK_TARGET:
             amount = order.amount * second_level_cashback_percent
             percentage = second_level_cashback_percent
@@ -105,7 +106,7 @@ class OrderService:
         else:
             amount = order.amount * third_level_cashback_percent
             percentage = third_level_cashback_percent
-        
+
         cashback: Cashback = Cashback.objects.filter(order=order).first()
         if cashback:
             cashback.amount = amount

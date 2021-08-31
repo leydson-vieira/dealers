@@ -55,4 +55,3 @@ class OrderListSerializer(serializers.ModelSerializer):
     def get_cashback_percentage(self, obj):
         human_percentage = obj.cashback.percentage * Decimal('100')
         return f'{human_percentage}%'
-        

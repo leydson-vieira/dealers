@@ -22,5 +22,5 @@ class TestDealerService:
             email='leydson.vieira@gmail.com',
             password='password'
         )
-        
+
         assert user

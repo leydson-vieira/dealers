@@ -12,7 +12,7 @@ class CashbackService:
         Returns the accumulated cashback value from external API
         """
         headers = {
-            settings.EXTERNAL_CASHBACK_API_TOKEN_HEADER: settings.EXTERNAL_CASHBACK_API_TOKEN
+            settings.EXTERNAL_CASHBACK_API_TOKEN_HEADER: settings.EXTERNAL_CASHBACK_API_TOKEN  # noqa
         }
 
         response = requests.get(

@@ -29,7 +29,9 @@ class TestApiV1Cashback:
         assert response.status_code == status.HTTP_200_OK
         assert response.json()['credit'] == 1700
 
-    def test_should_not_get_accumulated_cashback(self, logged_client, cashback_response):
+    def test_should_not_get_accumulated_cashback(
+        self, logged_client, cashback_response
+    ):
         mocked_response = mock.Mock()
         mocked_response.status_code = 400
         mocked_response.json = mock.Mock(return_value=cashback_response)

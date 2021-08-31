@@ -14,10 +14,12 @@ def user():
         password='password'
     )
 
+
 @pytest.fixture
 def unlogged_client(user):
     client = APIClient()
     return client
+
 
 @pytest.fixture
 def logged_client(user):

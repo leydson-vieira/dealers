@@ -29,7 +29,7 @@ class TestApiV1Orders:
 
     @pytest.fixture
     def payload(self):
-        return {        
+        return {
             "code": "007162t35",
             "cpf": "38723274884",
             "amount": "5200.50",
@@ -40,7 +40,7 @@ class TestApiV1Orders:
         # disable credentials
         unlogged_client.credentials()
         response = unlogged_client.post(reverse('orders'), payload)
-        
+
         assert response.status_code == status.HTTP_401_UNAUTHORIZED
 
     def test_should_not_create_with_cpf_doesnt_exist(self, logged_client, payload):
@@ -68,12 +68,17 @@ class TestApiV1Orders:
 
     def test_should_not_delete_an_order_when_not_found(self, logged_client):
         response = logged_client.delete(
-            reverse('orders-detail', kwargs={'order_id': '2fa3a532-94ee-4e82-8372-57fc97644ab3'})
+            reverse(
+                'orders-detail',
+                kwargs={'order_id': '2fa3a532-94ee-4e82-8372-57fc97644ab3'},
+            )
         )
 
         assert response.status_code == status.HTTP_404_NOT_FOUND
 
-    def test_should_not_delete_an_order_when_not_in_validation(self, logged_client, order):
+    def test_should_not_delete_an_order_when_not_in_validation(
+        self, logged_client, order
+    ):
         order.status = Order.Status.APPROVED
         order.save()
 
@@ -123,8 +128,6 @@ class TestApiV1Orders:
             payload,
         )
 
-        response_data = response.json()
-
         assert response.status_code == status.HTTP_409_CONFLICT
 
     def test_should_not_update_an_order_when_not_exist(self, logged_client):
@@ -135,12 +138,11 @@ class TestApiV1Orders:
 
         response = logged_client.patch(
             reverse(
-                'orders-detail', kwargs={'order_id': '2fa3a532-94ee-4e82-8372-57fc97644ab3'}
+                'orders-detail',
+                kwargs={'order_id': '2fa3a532-94ee-4e82-8372-57fc97644ab3'},
             ),
             payload,
         )
-
-        response_data = response.json()
 
         assert response.status_code == status.HTTP_404_NOT_FOUND
 
@@ -161,7 +163,5 @@ class TestApiV1Orders:
             ),
             payload,
         )
-
-        response_data = response.json()
 
         assert response.status_code == status.HTTP_400_BAD_REQUEST

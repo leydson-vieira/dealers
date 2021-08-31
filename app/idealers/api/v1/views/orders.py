@@ -17,7 +17,7 @@ class OrderView(APIView):
         orders = OrderService.list_orders()
         serializer = OrderListSerializer(instance=orders, many=True)
         return Response(data=serializer.data)
-        
+
     def post(self, request, *args, **kwargs) -> Response:
         serializer: OrderCreateSerializer = OrderCreateSerializer(data=request.data)
         serializer.is_valid(raise_exception=True)

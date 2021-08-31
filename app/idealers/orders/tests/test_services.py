@@ -2,7 +2,6 @@ from datetime import datetime
 from decimal import Decimal
 
 import pytest
-from _pytest.config import exceptions
 
 from ..exceptions import DealerDoesNotExist
 from ..models import Order
@@ -20,7 +19,9 @@ class TestOrderService:
             'cpf': '38723274884'
         }
 
-    def test_should_not_create_an_order_because_delaer_doesnt_exist(self, user, order_data):
+    def test_should_not_create_an_order_because_delaer_doesnt_exist(
+        self, user, order_data
+    ):
         order_data['cpf'] = '99999999999'
         with pytest.raises(DealerDoesNotExist):
             OrderService.create_order(**order_data)
@@ -56,7 +57,6 @@ class TestOrderService:
         order = OrderService.create_order(**order_data)
 
         assert order.cashback.amount == expected_cashback_amount
-
 
     @pytest.mark.parametrize(
         "cpf,status",

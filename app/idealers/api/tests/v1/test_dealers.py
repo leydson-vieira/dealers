@@ -23,7 +23,9 @@ class TestApiV1Dealers:
 
         assert response.status_code == status.HTTP_201_CREATED
 
-    def test_should_not_create_dealer_with_existing_mail(self, unlogged_client, payload):
+    def test_should_not_create_dealer_with_existing_mail(
+        self, unlogged_client, payload
+    ):
         # email that already exists
         payload['email'] = 'leydson.vieira@gmail.com'
 
@@ -31,7 +33,9 @@ class TestApiV1Dealers:
 
         assert response.status_code == status.HTTP_409_CONFLICT
 
-    def test_should_not_create_dealer_with_existing_cpf(self, unlogged_client, payload):
+    def test_should_not_create_dealer_with_existing_cpf(
+        self, unlogged_client, payload
+    ):
         # cpf that already exists
         payload['cpf'] = '38723274884'
 
@@ -39,7 +43,9 @@ class TestApiV1Dealers:
 
         assert response.status_code == status.HTTP_409_CONFLICT
 
-    def test_should_create_dealer_cpf_without_punctuation(self, logged_client, payload):
+    def test_should_create_dealer_cpf_without_punctuation(
+        self, logged_client, payload
+    ):
         response = logged_client.post(reverse('dealers'), payload)
         dealer = Dealer.objects.get(email='teste@teste.com')
 

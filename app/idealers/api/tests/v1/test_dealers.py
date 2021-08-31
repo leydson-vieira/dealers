@@ -1,10 +1,9 @@
 import pytest
-
+from django.urls import reverse
 from rest_framework import status
 
-from django.urls import reverse
-
 from authentication.models import Dealer
+
 
 @pytest.mark.django_db
 class TestApiV1Dealers:

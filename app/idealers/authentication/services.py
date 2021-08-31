@@ -1,7 +1,7 @@
 from django.db.models import Q
 
-from .models import Dealer
 from .exceptions import DealerAlreadyExists
+from .models import Dealer
 
 
 class DealerService:

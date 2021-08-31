@@ -1,11 +1,13 @@
-from rest_framework.permissions import IsAuthenticated
-from rest_framework.views import APIView
-from rest_framework.response import Response
 from rest_framework import status
+from rest_framework.permissions import IsAuthenticated
+from rest_framework.response import Response
+from rest_framework.views import APIView
 
-from orders.serializers import OrderCreateSerializer, OrderListSerializer, OrderUpdateSerializer
+from orders.exceptions import (DealerDoesNotExist, OrderCodeAlreadyExists,
+                               OrderDoesNotExist, StatusNotAllowed)
+from orders.serializers import (OrderCreateSerializer, OrderListSerializer,
+                                OrderUpdateSerializer)
 from orders.services import OrderService
-from orders.exceptions import DealerDoesNotExist, OrderCodeAlreadyExists, OrderDoesNotExist, StatusNotAllowed
 
 
 class OrderView(APIView):

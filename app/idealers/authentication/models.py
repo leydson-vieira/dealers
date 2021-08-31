@@ -1,9 +1,8 @@
 import uuid
 
 from django.contrib.auth.base_user import AbstractBaseUser
-
-from django.utils import timezone
 from django.db import models
+from django.utils import timezone
 
 from .managers import DealerManager
 

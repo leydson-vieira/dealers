@@ -1,11 +1,12 @@
-from decimal import Decimal
 from datetime import datetime
-from _pytest.config import exceptions
-import pytest
+from decimal import Decimal
 
-from ..services import OrderService
+import pytest
+from _pytest.config import exceptions
+
 from ..exceptions import DealerDoesNotExist
 from ..models import Order
+from ..services import OrderService
 
 
 @pytest.mark.django_db

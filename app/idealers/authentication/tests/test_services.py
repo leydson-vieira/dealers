@@ -1,7 +1,8 @@
 import pytest
 
-from ..services import DealerService
 from ..exceptions import DealerAlreadyExists
+from ..services import DealerService
+
 
 @pytest.mark.django_db
 class TestDealerService:

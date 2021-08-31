@@ -1,14 +1,15 @@
-from typing import Optional
 from datetime import datetime
 from decimal import Decimal
+from typing import Optional
 
 from django.conf import settings
 
 from authentication.models import Dealer
 from cashback.models import Cashback
 
+from .exceptions import (DealerDoesNotExist, OrderCodeAlreadyExists,
+                         OrderDoesNotExist, StatusNotAllowed)
 from .models import Order
-from .exceptions import DealerDoesNotExist, OrderCodeAlreadyExists, OrderDoesNotExist, StatusNotAllowed
 
 
 class OrderService:

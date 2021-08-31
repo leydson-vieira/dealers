@@ -1,12 +1,12 @@
-import pytest
 from decimal import Decimal
 
+import pytest
+from django.urls import reverse
 from rest_framework import status
 
-from django.urls import reverse
-
-from orders.models import Order
 from cashback.models import Cashback
+from orders.models import Order
+
 
 @pytest.mark.django_db
 class TestApiV1Orders:

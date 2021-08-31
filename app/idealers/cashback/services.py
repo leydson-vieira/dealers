@@ -1,8 +1,8 @@
 from typing import Dict
-import requests
-from rest_framework import status
 
+import requests
 from django.conf import settings
+from rest_framework import status
 
 
 class CashbackService:

@@ -61,8 +61,8 @@ class OrderService:
         return order
 
     @staticmethod
-    def list_orders(limit: int = 10, offset: int = 0):
-        return list(Order.objects.all()[offset:offset + limit])
+    def list_orders(user, limit: int = 10, offset: int = 0):
+        return list(Order.objects.filter(dealer=user)[offset:offset + limit])
 
     @staticmethod
     def delete_order(order_id: str) -> None:

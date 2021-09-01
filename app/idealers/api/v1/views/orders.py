@@ -20,7 +20,7 @@ class OrderView(APIView):
         limit = int(limit) if limit.isdigit() else 10
         offset = int(offset) if offset.isdigit() else 0
 
-        orders = OrderService.list_orders(limit, offset)
+        orders = OrderService.list_orders(request.user, limit, offset)
         serializer = OrderListSerializer(instance=orders, many=True)
         return Response(data=serializer.data)
 
